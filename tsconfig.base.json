@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@apolonsoft/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@apolonsoft/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@apolonsoft/entities": ["libs/entities/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,1 +1,3 @@
-export * from './lib/api-interfaces';
+export * from './interfaces';
+export * from './enums';
+export * from './dtos';
