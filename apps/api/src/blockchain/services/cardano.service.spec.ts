@@ -27,9 +27,9 @@ describe('CardanoService', () => {
     service = module.get<CardanoService>(CardanoService);
   });
 
-  it("should not create a walletServer if there's no cardanoWalletEndpoint key", async () => {
-    jest.spyOn(config, 'get').mockReturnValueOnce(undefined);
-    expect(service.walletServer).toBeUndefined();
+  it('should have an undefined walletServer', () => {
+    const cardanoService = new CardanoService(new ConfigService({get: () => undefined}));
+    expect(cardanoService.walletServer).toBeUndefined();
   });
 
   it('should be defined walletServer', () => {
