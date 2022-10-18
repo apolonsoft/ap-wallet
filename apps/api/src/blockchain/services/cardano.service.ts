@@ -10,14 +10,16 @@ import { CreateCardanoWalletDto } from '@apolonsoft/api-interfaces';
 @Injectable()
 export class CardanoService {
   private logger: Logger = new Logger(CardanoService.name);
-  private walletServer: WalletServer;
+  walletServer: WalletServer;
 
   constructor(private readonly configService: ConfigService) {
-    const cardanoWalletEndpoint = this.configService.getOrThrow(
+    const cardanoWalletEndpoint = this.configService.get<string>(
       'cardano.cardanoWalletEndpoint'
     );
-    this.logger.debug(cardanoWalletEndpoint);
-    this.walletServer = WalletServer.init(cardanoWalletEndpoint);
+    if(cardanoWalletEndpoint){
+      this.walletServer = WalletServer.init(cardanoWalletEndpoint);
+    }
+    this.logger.log('Cardano Wallet Server Initialized');
   }
 
   async getInfo(): Promise<ApiNetworkInformation> {
