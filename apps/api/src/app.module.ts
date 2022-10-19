@@ -8,9 +8,13 @@ import { BlockchainModule } from './blockchain/blockchain.module';
 import * as entities from './database/entities-index';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionsFilter } from './common/filters/global-exceptions.filter';
-
+import {ThrottlerModule} from '@nestjs/throttler';
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     ConfigModule.forRoot({
       load: [database, cardano],
       envFilePath: '.env',

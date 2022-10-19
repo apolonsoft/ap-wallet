@@ -21,7 +21,11 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const validationErrors = exception instanceof HttpException ? exception.getResponse()['message'] : [];
+    const errorMessage =  exception instanceof HttpException ? exception.message : '';
     const responseBody = {
+      validationErrors,
+      errorMessage,
       statusCode: httpStatus,
       timestamp: new Date().toISOString(),
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
